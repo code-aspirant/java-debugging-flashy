@@ -62,11 +62,11 @@ public class FlashCardServiceImpl implements FlashCardService {
         continue;
       }
       Long lowestScore = idToViewCounts.get(leastViewedId);
-      if (entry.getValue() >= lowestScore) {
-        break;
+      if (entry.getValue() < lowestScore) {
+        leastViewedId = entry.getKey();
       }
-      leastViewedId = entry.getKey();
     }
+    // How do we know this is the least viewed since we didn't go through the whole list?
     return flashCardRepository.findOne(leastViewedId);
   }
 
